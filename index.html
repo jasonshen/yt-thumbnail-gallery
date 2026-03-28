@@ -58,7 +58,7 @@
 </head>
 <body>
 <h1>YouTube Thumbnail Formats — Curated v2</h1>
-<p class="header-sub">48 curated examples across 13 categories. All landscape, high-quality, branded channels only. No shorts, no before-after.</p>
+<p class="header-sub">96 curated examples across 21 categories. All landscape, high-quality, branded channels only. No shorts, no before-after.</p>
 
 <nav class="toc" id="toc"></nav>
 <main id="gallery"></main>
@@ -81,7 +81,15 @@ const categories = [
   { id: "11", dir: "11-story-headline", title: "Story Headline", desc: "News-style or documentary framing. The headline carries the thumbnail." },
   { id: "12", dir: "12-emotional-scene", title: "Emotional Scene", desc: "Movie stills, dramatic scenes, or cinematic moments that evoke feeling." },
   { id: "13", dir: "13-minimalist-object", title: "Minimalist Object", desc: "Clean, minimal composition centered on a single object or very few elements." },
-  { id: "14", dir: "14-quote-card", title: "Quote Card", desc: "A quote or text-heavy card layout. The words are the thumbnail." }
+  { id: "14", dir: "14-quote-card", title: "Quote Card", desc: "A quote or text-heavy card layout. The words are the thumbnail." },
+  { id: "15", dir: "15-tier-list", title: "Tier List", desc: "Color-coded S-F tier grid ranking items. The thumbnail IS the content preview — instantly recognizable format with 1B+ views in H1 2025." },
+  { id: "16", dir: "16-iceberg", title: "Iceberg Explained", desc: "Literal iceberg graphic with layers of increasing depth/obscurity. Popularized by Wendigoon. Unmistakable thumbnail format." },
+  { id: "17", dir: "17-case-study", title: "Case Study / How X Did Y", desc: "Company logo + dramatic text overlay. Borrowed authority from known brands. Slidebean, Company Man, Cold Fusion style." },
+  { id: "18", dir: "18-expert-reacts", title: "Expert Reacts", desc: "Split screen — content on one side, expert's expressive face on the other. Doctor Mike, Legal Eagle template." },
+  { id: "19", dir: "19-red-flag-green-flag", title: "Red Flag / Green Flag", desc: "Binary red vs green visual language. Dead simple to execute, maps perfectly to diagnostic coaching content." },
+  { id: "20", dir: "20-why-youre-wrong", title: "Why You're Wrong / Stop Doing", desc: "Confrontational hand gesture, STOP or red X. Hormozi-style provocative framing that demands attention." },
+  { id: "21", dir: "21-myth-vs-reality", title: "Myth vs Reality", desc: "Split panel with crossed-out MYTH vs checkmark REALITY. Clean, high-contrast, information-dense debunking format." },
+  { id: "22", dir: "22-watch-me-do", title: "Watch Me Do X", desc: "Authenticity play — less polished, more 'caught in the act.' The differentiator: nobody else can show real coaching in action." }
 ];
 
 const files = {
@@ -97,7 +105,15 @@ const files = {
   "11-story-headline": ["Bloomberg-1.jpg","Bloomberg-3.jpg","WSJ-3.jpg","thumb-3.jpg"],
   "12-emotional-scene": ["thumb-1.jpg","thumb-2.jpg","thumb-4.jpg","thumb-5.jpg","thumb-6.jpg"],
   "13-minimalist-object": ["MKBHD-1.jpg","MattDAvella-2.jpg","TheMinimalists-3.jpg","TheMinimalists-5.jpg"],
-  "14-quote-card": ["DiaryOfACEO-2.jpg","DiaryOfACEO-3.jpg","LewisHowes-1.jpg","LewisHowes-3.jpg"]
+  "14-quote-card": ["DiaryOfACEO-2.jpg","DiaryOfACEO-3.jpg","LewisHowes-1.jpg","LewisHowes-3.jpg"],
+  "15-tier-list": ["business-degree-tier-list_shane-hummus_B18s35MlYZw.jpg","cereal-tier-list_bugs_HxqYznihKe4.jpg","everything-tier-list_circletoons_lD7g00gxhFg.jpg","finance-careers-tier-list_aj-srmek_WNqgikiQM2w.jpg","jobs-future-tier-list_shane-hummus_SxKv3E6b-6M.jpg","minecraft-tier-list_socksstudios_FPO1UXQVEyk.jpg"],
+  "16-iceberg": ["4chan-iceberg_dantavius_6HWf296l1yg.jpg","alien-isolation-iceberg_saadtheglad_eOTfYky1aYE.jpg","baldurs-gate-iceberg_franklygaming_ZhKtAYNRF6o.jpg","linguistics-iceberg_duncan-clarke_GFz6KqZurFY.jpg","lost-media-iceberg_sourcebrew_v1rvg0yBpb0.jpg","scp-iceberg_maker_ihALi1wACvE.jpg"],
+  "17-case-study": ["47b-cult_magnates-media_c9Xm1bT50DQ.jpg","apple-failing_think-school_wP6nHR7cI58.jpg","grab-rise_cnbc_PR2194ddosg.jpg","mbas-failed-boeing_think-school_AnOqz5TsumU.jpg","nvidia-rise_explorist_1QC9X_QW52k.jpg","wework-collapse_wsj_p3q5m0ILTfk.jpg"],
+  "18-expert-reacts": ["doctor-lawyer-react-greys_doctor-mike_m4stVVsKVRA.jpg","doctor-reacts-good-doctor_doctor-mike_Ya_trIAWIXA.jpg","doctor-reacts-tiktok_doctor-mike_VBduQSuqimc.jpg","doctors-react-the-pitt_doctor-mike_2VftZa_qhRA.jpg","lawyer-reacts-better-call-saul_legal-eagle_FCZ06Sfr9Cg.jpg","legal-eagle-wired_legal-eagle_UbZlYl92OGU.jpg"],
+  "19-red-flag-green-flag": ["cheating-red-flags_jimmy_rHogiIIueeI.jpg","emotionally-immature-red-flag_courtney-ryan_uKJCvmJh9J0.jpg","green-flags-emotionally-safe_psych2go_8IMhXtWHG8w.jpg","red-flags-ignoring_school-of-life_S50oBiocXjs.jpg","red-flags-in-yourself_psych2go_n2_KGIP4T7k.jpg","red-flags-relationship_dr-ana_0XiLT8VjtvM.jpg"],
+  "20-why-youre-wrong": ["muscle-building-mistakes_sean-nalewanyj_LhEFM7qerCI.jpg","outwork-everyone-cuban_motiversity_IVNK5gkVq2Q.jpg","stop-fear-anxiety_mel-robbins_6n8i7ua0mSw.jpg","stop-procrastinating_mel-robbins_4x7MkLDGnu8.jpg","training-mistakes_jeff-nippard_Dp3truKibtc.jpg","verbal-tricks-aggressive_charisma-on-command_nS9W-wlJHPA.jpg"],
+  "21-myth-vs-reality": ["debunk-baby-myths_insider_jzFY1KDoaeU.jpg","debunk-caffeine-myths_insider_WqAMr-ztG8o.jpg","debunk-postpartum-myths_insider_cD1wKMSOqD8.jpg","dinosaur-myths_paint-explainer_oACmEDvrHL4.jpg","mental-health-myths_insider_Ii5m8Ta1iBY.jpg","myths-of-ocd_ted-ed_DhlRgwdDc-E.jpg"],
+  "22-watch-me-do": ["50-live-cold-calls_trent-dressel_ci-FdcWiJiA.jpg","behind-scenes-couples-photo_becca-cannon_1f9QPHEDyBc.jpg","jordan-belfort-selling-live_GBRUa4TZqHk.jpg","phone-sales-training-live_grant-cardone_ZG4ExqMVA7w.jpg","uncomfortable-conversation_simon-sinek_RcGkHrPSzDc.jpg","watch-me-close-phone_grant-cardone_gjHv4pM8WEQ.jpg"]
 };
 
 const toc = document.getElementById('toc');
