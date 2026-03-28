@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YouTube Thumbnail Formats — Curated Gallery</title>
+<title>YouTube Thumbnail Formats — Curated Gallery v2</title>
 <style>
   :root {
     --bg: #0a0a0f; --surface: #141419; --border: #1f1f2e;
     --text: #e4e4e7; --muted: #71717a;
     --accent: #6366f1; --accent2: #818cf8;
-    --face: #22c55e; --noface: #f59e0b; --red: #ef4444;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -26,154 +25,119 @@
     border-radius: 6px; padding: 6px 12px; transition: background 0.15s;
   }
   .toc a:hover { background: var(--border); }
-  .toc .face-tag { color: var(--face); font-weight: 600; }
-  .toc .noface-tag { color: var(--noface); font-weight: 600; }
   .category { margin-bottom: 56px; }
   .cat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
   .cat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); opacity: 0.4; }
   .cat-title { font-size: 1.2rem; font-weight: 700; }
-  .cat-badge {
-    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 2px 8px; border-radius: 4px; font-weight: 700;
-  }
-  .cat-badge.face { background: rgba(34,197,94,0.15); color: var(--face); }
-  .cat-badge.noface { background: rgba(245,158,11,0.15); color: var(--noface); }
   .cat-count {
     font-size: 0.7rem; color: var(--muted); background: var(--surface);
     border: 1px solid var(--border); padding: 2px 8px; border-radius: 4px;
   }
-  .cat-count.thin { color: var(--red); border-color: rgba(239,68,68,0.3); }
   .cat-desc { color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; max-width: 800px; }
   .thumb-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 12px;
   }
-  .thumb-grid img {
-    width: 100%; border-radius: 8px;
-    border: 2px solid var(--border);
-    transition: transform 0.15s, border-color 0.15s;
-    cursor: pointer; aspect-ratio: 16/9; object-fit: cover;
+  .thumb-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; transition: transform 0.15s;
   }
-  .thumb-grid img:hover { transform: scale(1.03); border-color: var(--accent); }
-  .lightbox {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.92); z-index: 1000;
-    justify-content: center; align-items: center; cursor: pointer;
+  .thumb-card:hover { transform: scale(1.02); }
+  .thumb-card img {
+    width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;
   }
+  .thumb-label {
+    padding: 8px 12px; font-size: 0.72rem; color: var(--muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  /* Lightbox */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; justify-content: center; align-items: center; cursor: zoom-out; }
   .lightbox.active { display: flex; }
   .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
-  .footer {
-    text-align: center; color: var(--muted); font-size: 0.75rem;
-    padding: 32px 0 16px; border-top: 1px solid var(--border);
-  }
-  .verified-badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 0.7rem; color: var(--face); margin-left: 8px;
-  }
-  @media (max-width: 640px) {
-    body { padding: 16px; }
-    h1 { font-size: 1.4rem; }
-    .thumb-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-  }
 </style>
 </head>
 <body>
-
-<h1>🎬 YouTube Thumbnail Formats <span class="verified-badge">✅ Vision-Verified</span></h1>
-<p class="header-sub">14 formats — every thumbnail individually audited by AI vision to confirm it matches its category</p>
+<h1>YouTube Thumbnail Formats — Curated v2</h1>
+<p class="header-sub">53 curated examples across 13 categories. Shorts, low-quality, and before-after removed. Branded channels only.</p>
 
 <nav class="toc" id="toc"></nav>
-<div id="categories"></div>
+<main id="gallery"></main>
 
 <div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
-  <img id="lightboxImg" src="" alt="">
+  <img id="lightbox-img" src="" alt="">
 </div>
 
-<div class="footer">Each thumbnail verified against strict format criteria · Click to enlarge · ESC to close</div>
-
 <script>
-const CATEGORIES = [
-  { num: '01', dir: '01-emotional-closeup', title: 'The Emotional Close-Up', face: true, count: 1,
-    desc: 'Tight crop of face showing single strong emotion. Face fills 60%+ of frame. Minimal text. Dark/blurred background.' },
-  { num: '02', dir: '02-split-screen-vs', title: 'The Split-Screen / VS', face: true, count: 5,
-    desc: 'Two people or states divided by clear vertical line or diagonal. Often labeled "VS" with contrasting colors.' },
-  { num: '03', dir: '03-bold-text', title: 'The Bold Text Statement', face: false, count: 1,
-    desc: '2-4 words in massive bold type against solid background. No face, no real imagery. Text does all the work.' },
-  { num: '04', dir: '04-illustrated', title: 'The Illustrated Concept', face: false, count: 8,
-    desc: 'Custom illustration or animation-style art. No real photos. Sophisticated palette. Signals intellectual depth.' },
-  { num: '05', dir: '05-number-anchor', title: 'The Number Anchor', face: true, count: 1,
-    desc: 'Large number dominates ("7", "$10M", "90%") alongside face. The number IS the visual hook.' },
-  { num: '06', dir: '06-reaction-object', title: 'The Reaction + Object Combo', face: true, count: 5,
-    desc: "Creator's face reacting to a specific object, document, or prop. Arrow/circle highlights the object." },
-  { num: '07', dir: '07-before-after', title: 'The Before / After Transformation', face: true, count: 2,
-    desc: 'Left = before (struggling). Right = after (thriving). Clear visual progression negative → positive.' },
-  { num: '08', dir: '08-mystery-blur', title: 'The Mystery / Blur Reveal', face: false, count: 2,
-    desc: 'Key element blurred, redacted, or obscured. Creates information gap requiring a click to resolve.' },
-  { num: '09', dir: '09-podcast-twoshot', title: 'The Podcast Two-Shot', face: true, count: 1,
-    desc: 'Two faces side by side — host and guest. Clean background, professional lighting. Guest name or pull quote.' },
-  { num: '10', dir: '10-whiteboard-framework', title: 'The Whiteboard / Framework', face: false, count: 5,
-    desc: 'Framework, diagram, matrix, or flowchart as the main element. Signals proprietary methodology.' },
-  { num: '11', dir: '11-story-headline', title: 'The Story Headline', face: false, count: 2,
-    desc: 'Styled like a news headline or magazine cover. Large editorial font. Journalistic feel. Text dominates.' },
-  { num: '12', dir: '12-emotional-scene', title: 'The Emotional Scene', face: true, count: 5,
-    desc: 'Wider shot showing a staged/captured moment. Body language carries the message. Cinematic, not headshot.' },
-  { num: '13', dir: '13-minimalist-object', title: 'The Minimalist Object', face: false, count: 1,
-    desc: 'Single object centered on clean background. Apple-ad simplicity. Object carries the entire meaning.' },
-  { num: '14', dir: '14-quote-card', title: 'The Quote Card', face: true, count: 3,
-    desc: "Short punchy quote in large text alongside speaker's photo. The quote itself is the hook." },
+const categories = [
+  { id: "01", dir: "01-emotional-closeup", title: "Emotional Closeup", desc: "Tight face crop, intense expression, direct eye contact. Creates intimacy and emotional pull." },
+  { id: "02", dir: "02-split-screen-vs", title: "Split Screen / VS", desc: "Side-by-side comparison, debate format, or contrasting elements with a divider." },
+  { id: "03", dir: "03-bold-text", title: "Bold Text Dominant", desc: "Large, high-contrast text is the primary visual element. Face secondary or absent." },
+  { id: "04", dir: "04-illustrated", title: "Illustrated / Animated", desc: "Hand-drawn, animated, or illustrated style. No real photography." },
+  { id: "05", dir: "05-number-anchor", title: "Number Anchor", desc: "A big number ($, %, count) is the visual hook that drives the click." },
+  { id: "06", dir: "06-reaction-object", title: "Reaction + Object", desc: "Person reacting to or holding a product/object. The object drives curiosity." },
+  { id: "08", dir: "08-mystery-blur", title: "Mystery / Blur", desc: "Intentionally obscured, blurred, or redacted elements that create curiosity gaps." },
+  { id: "09", dir: "09-podcast-twoshot", title: "Podcast Two-Shot", desc: "Two people in interview or podcast framing. Conversation energy." },
+  { id: "10", dir: "10-whiteboard-framework", title: "Whiteboard / Framework", desc: "Diagrams, frameworks, visual teaching. The structure IS the thumbnail." },
+  { id: "11", dir: "11-story-headline", title: "Story Headline", desc: "News-style or documentary framing. The headline carries the thumbnail." },
+  { id: "12", dir: "12-emotional-scene", title: "Emotional Scene", desc: "Movie stills, dramatic scenes, or cinematic moments that evoke feeling." },
+  { id: "13", dir: "13-minimalist-object", title: "Minimalist Object", desc: "Clean, minimal composition centered on a single object or very few elements." },
+  { id: "14", dir: "14-quote-card", title: "Quote Card", desc: "A quote or text-heavy card layout. The words are the thumbnail." }
 ];
 
-// Build TOC
-const tocEl = document.getElementById('toc');
-CATEGORIES.forEach(cat => {
-  const a = document.createElement('a');
-  a.href = '#cat-' + cat.num;
-  const badge = cat.face ? '<span class="face-tag">FACE</span>' : '<span class="noface-tag">NO FACE</span>';
-  a.innerHTML = cat.num + '. ' + cat.title + ' ' + badge;
-  tocEl.appendChild(a);
-});
+// File lists per category (hardcoded for reliability)
+const files = {
+  "01-emotional-closeup": ["AlexHormozi-1.jpg","AlexHormozi-8.jpg","AliAbdaal-7.jpg","CharismaOnCommand-3.jpg"],
+  "02-split-screen-vs": ["CharismaOnCommand-1.jpg","Psych2Go-4.jpg","thumb-13.jpg","thumb-14.jpg"],
+  "03-bold-text": ["GrahamStephan-1.jpg","HowMoneyWorks-2.jpg","PatrickBoyle-1.jpg","thumb-13.jpg"],
+  "04-illustrated": ["thumb-14.jpg","thumb-15.jpg","thumb-2.jpg","thumb-3.jpg","thumb-4.jpg","thumb-5.jpg","thumb-6.jpg","thumb-7.jpg"],
+  "05-number-anchor": ["AliAbdaal-3.jpg","thumb-8.jpg"],
+  "06-reaction-object": ["thumb-1.jpg","thumb-2.jpg","thumb-4.jpg","thumb-5.jpg","thumb-6.jpg"],
+  "08-mystery-blur": ["BusinessInsider-2.jpg","Veritasium-2.jpg","thumb-2.jpg"],
+  "09-podcast-twoshot": ["DiaryOfACEO-1.jpg","DiaryOfACEO-3.jpg","thumb-12.jpg"],
+  "10-whiteboard-framework": ["AlexHormozi-3.jpg","HBR-2.jpg","thumb-1.jpg","thumb-4.jpg","thumb-5.jpg"],
+  "11-story-headline": ["thumb-1.jpg","thumb-3.jpg"],
+  "12-emotional-scene": ["thumb-1.jpg","thumb-2.jpg","thumb-4.jpg","thumb-5.jpg","thumb-6.jpg"],
+  "13-minimalist-object": ["MKBHD-1.jpg","MattDAvella-2.jpg","TheMinimalists-3.jpg","TheMinimalists-5.jpg"],
+  "14-quote-card": ["DiaryOfACEO-2.jpg","DiaryOfACEO-3.jpg","LewisHowes-1.jpg","LewisHowes-3.jpg"]
+};
 
-// Build categories
-const catsEl = document.getElementById('categories');
-CATEGORIES.forEach(cat => {
+const toc = document.getElementById('toc');
+const gallery = document.getElementById('gallery');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+
+categories.forEach(cat => {
+  const imgs = files[cat.dir] || [];
+  // TOC
+  const a = document.createElement('a');
+  a.href = '#cat-' + cat.id;
+  a.textContent = cat.id + ' ' + cat.title + ' (' + imgs.length + ')';
+  toc.appendChild(a);
+  // Category
   const section = document.createElement('div');
   section.className = 'category';
-  section.id = 'cat-' + cat.num;
-  const badgeClass = cat.face ? 'face' : 'noface';
-  const badgeText = cat.face ? 'FACE' : 'NO FACE';
-  const countClass = cat.count < 3 ? 'cat-count thin' : 'cat-count';
-
-  section.innerHTML = '<div class="cat-header">' +
-    '<span class="cat-num">' + cat.num + '</span>' +
-    '<span class="cat-title">' + cat.title + '</span>' +
-    '<span class="cat-badge ' + badgeClass + '">' + badgeText + '</span>' +
-    '<span class="' + countClass + '">' + cat.count + ' verified</span>' +
-    '</div>' +
-    '<p class="cat-desc">' + cat.desc + '</p>' +
-    '<div class="thumb-grid" id="grid-' + cat.num + '"></div>';
-
-  catsEl.appendChild(section);
-
-  const grid = document.getElementById('grid-' + cat.num);
-  // Try numbered thumbs
-  for (let i = 1; i <= 20; i++) {
+  section.id = 'cat-' + cat.id;
+  section.innerHTML = '<div class="cat-header"><span class="cat-num">' + cat.id + '</span><span class="cat-title">' + cat.title + '</span><span class="cat-count">' + imgs.length + ' examples</span></div><p class="cat-desc">' + cat.desc + '</p>';
+  const grid = document.createElement('div');
+  grid.className = 'thumb-grid';
+  imgs.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'thumb-card';
     const img = document.createElement('img');
-    img.src = cat.dir + '/thumb-' + i + '.jpg';
-    img.alt = cat.title + ' example ' + i;
+    img.src = cat.dir + '/' + f;
+    img.alt = f;
     img.loading = 'lazy';
-    img.onerror = function() { this.remove(); };
-    img.onclick = function(e) {
-      e.stopPropagation();
-      document.getElementById('lightboxImg').src = this.src;
-      document.getElementById('lightbox').classList.add('active');
-    };
-    grid.appendChild(img);
-  }
-});
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
+    img.onclick = function(e) { e.stopPropagation(); lbImg.src = this.src; lightbox.classList.add('active'); };
+    const label = document.createElement('div');
+    label.className = 'thumb-label';
+    label.textContent = f.replace('.jpg','').replace(/-/g,' ');
+    card.appendChild(img);
+    card.appendChild(label);
+    grid.appendChild(card);
+  });
+  section.appendChild(grid);
+  gallery.appendChild(section);
 });
 </script>
 </body>
