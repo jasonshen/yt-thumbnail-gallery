@@ -159,7 +159,7 @@ CATEGORIES.forEach(cat => {
   // Try numbered thumbs
   for (let i = 1; i <= 20; i++) {
     const img = document.createElement('img');
-    img.src = cat.dir + '/thumb-' + i + '.jpg';
+    img.src = 'curated/' + cat.dir + '/thumb-' + i + '.jpg';
     img.alt = cat.title + ' example ' + i;
     img.loading = 'lazy';
     img.onerror = function() { this.remove(); };
