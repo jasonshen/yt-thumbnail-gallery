@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Thumbnail Format Gallery — Cofounder Conflict</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #141419;
+    --border: #1f1f2e;
+    --text: #e4e4e7;
+    --muted: #71717a;
+    --accent: #6366f1;
+    --accent2: #818cf8;
+    --face: #22c55e;
+    --noface: #f59e0b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    padding: 32px; line-height: 1.5;
+  }
+  h1 { font-size: 2rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.02em; }
+  .header-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 32px; }
+  .toc {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px;
+  }
+  .toc a {
+    font-size: 0.78rem; color: var(--accent2); text-decoration: none;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 12px;
+    transition: background 0.15s;
+  }
+  .toc a:hover { background: var(--border); }
+  .toc .face-tag { color: var(--face); font-weight: 600; }
+  .toc .noface-tag { color: var(--noface); font-weight: 600; }
+
+  .category {
+    margin-bottom: 56px;
+  }
+  .cat-header {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 6px;
+  }
+  .cat-num {
+    font-size: 1.8rem; font-weight: 800; color: var(--accent);
+    opacity: 0.4; line-height: 1;
+  }
+  .cat-title { font-size: 1.2rem; font-weight: 700; }
+  .cat-badge {
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 2px 8px; border-radius: 4px; font-weight: 700;
+  }
+  .cat-badge.face { background: rgba(34,197,94,0.15); color: var(--face); }
+  .cat-badge.noface { background: rgba(245,158,11,0.15); color: var(--noface); }
+  .cat-desc {
+    color: var(--muted); font-size: 0.85rem; margin-bottom: 16px;
+    max-width: 800px;
+  }
+
+  .channel-section { margin-bottom: 20px; }
+  .channel-name {
+    font-size: 0.8rem; color: var(--muted); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    margin-bottom: 8px; padding-left: 2px;
+  }
+  .thumb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .thumb-grid img {
+    width: 100%; border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: transform 0.15s, border-color 0.15s;
+    cursor: pointer;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  .thumb-grid img:hover {
+    transform: scale(1.03);
+    border-color: var(--accent);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92); z-index: 1000;
+    justify-content: center; align-items: center;
+    cursor: pointer;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-width: 90vw; max-height: 90vh;
+    border-radius: 8px; box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  }
+
+  .footer {
+    text-align: center; color: var(--muted); font-size: 0.75rem;
+    padding: 32px 0 16px; border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 16px; }
+    h1 { font-size: 1.4rem; }
+    .thumb-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<h1>🎬 YouTube Thumbnail Formats</h1>
+<p class="header-sub">14 formats × ~4 channels × 8 examples each — visual reference library for cofounder conflict content</p>
+
+<nav class="toc" id="toc"></nav>
+
+<div id="categories"></div>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<div class="footer">Collected from 50+ YouTube channels · Click any thumbnail to enlarge</div>
+
+<script>
+const CATEGORIES = [
+  {
+    num: '01', dir: '01-emotional-closeup', title: 'The Emotional Close-Up', face: true,
+    desc: 'Tight crop of the creator\'s face showing a single strong emotion. Minimal or zero text. The face IS the message.',
+    channels: ['AlexHormozi', 'AliAbdaal', 'ScienceOfPeople', 'CharismaOnCommand']
+  },
+  {
+    num: '02', dir: '02-split-screen-vs', title: 'The Split-Screen / VS', face: true,
+    desc: 'Two people or two states divided by a clear vertical line or diagonal slash. Often labeled "VS" or uses contrasting colors.',
+    channels: ['CharismaOnCommand', 'SchoolOfLife', 'BusinessInsider', 'Psych2Go']
+  },
+  {
+    num: '03', dir: '03-bold-text', title: 'The Bold Text Statement', face: false,
+    desc: '2-4 words in massive bold sans-serif type against a solid or gradient background. Text does all the heavy lifting.',
+    channels: ['GrahamStephan', 'HowMoneyWorks', 'PatrickBoyle', 'PlainBagel']
+  },
+  {
+    num: '04', dir: '04-illustrated', title: 'The Illustrated Concept', face: false,
+    desc: 'Custom illustration or animation-style art. Muted, sophisticated palettes. No real photos. Signals intellectual depth.',
+    channels: ['SchoolOfLife', 'TEDEd', 'Kurzgesagt', 'AfterSkool']
+  },
+  {
+    num: '05', dir: '05-number-anchor', title: 'The Number Anchor', face: true,
+    desc: 'A large number dominates ("7", "$10M", "90%") alongside the creator\'s face. The number is the visual hook.',
+    channels: ['AliAbdaal', 'ThomasFrank', 'MattDAvella', 'ScienceOfPeople']
+  },
+  {
+    num: '06', dir: '06-reaction-object', title: 'The Reaction + Object Combo', face: true,
+    desc: 'Creator\'s face reacting to a specific object, document, or screenshot. Arrow or circle often highlights the object.',
+    channels: ['AlexHormozi', 'GrahamStephan', 'AliAbdaal', 'MKBHD']
+  },
+  {
+    num: '07', dir: '07-before-after', title: 'The Before / After Transformation', face: true,
+    desc: 'Left side shows "before" state (struggling, messy). Right side shows "after" (thriving, clean). Clear visual progression.',
+    channels: ['MattDAvella', 'ThomasFrank', 'YCombinator', 'DoctorMike']
+  },
+  {
+    num: '08', dir: '08-mystery-blur', title: 'The Mystery / Blur Reveal', face: false,
+    desc: 'Key element is blurred, redacted, or obscured. Creates an information gap the viewer needs to resolve by clicking.',
+    channels: ['Veritasium', 'ColinAndSamir', 'BusinessInsider', 'JohnnyHarris']
+  },
+  {
+    num: '09', dir: '09-podcast-twoshot', title: 'The Podcast / Interview Two-Shot', face: true,
+    desc: 'Two faces side by side — host and guest. Clean background, professional lighting. Telegraphs "expert interview" instantly.',
+    channels: ['DiaryOfACEO', 'LexFridman', 'ImpactTheory', 'TimFerriss']
+  },
+  {
+    num: '10', dir: '10-whiteboard-framework', title: 'The Whiteboard / Framework Diagram', face: false,
+    desc: 'Hand-drawn or designed framework, diagram, or matrix. Signals proprietary methodology and structured thinking.',
+    channels: ['YCombinator', 'HBR', 'Strategyzer', 'AlexHormozi']
+  },
+  {
+    num: '11', dir: '11-story-headline', title: 'The Story Headline', face: false,
+    desc: 'Styled like a news headline or magazine cover. Large serif or editorial font. Feels journalistic.',
+    channels: ['MorningBrew', 'Bloomberg', 'CNBC', 'WSJ']
+  },
+  {
+    num: '12', dir: '12-emotional-scene', title: 'The Emotional Scene / Staged Moment', face: true,
+    desc: 'Wider shot showing a staged or captured moment. Two people at a table looking tense, a handshake or its opposite. Body language carries the message.',
+    channels: ['EstherPerel', 'SchoolOfLife', 'Psych2Go', 'CinemaTherapy']
+  },
+  {
+    num: '13', dir: '13-minimalist-object', title: 'The Minimalist Object', face: false,
+    desc: 'Single object centered on a clean background. Apple-ad-level simplicity. The object carries the entire meaning.',
+    channels: ['MattDAvella', 'TheMinimalists', 'JomaTech', 'MKBHD']
+  },
+  {
+    num: '14', dir: '14-quote-card', title: 'The Quote Card / Pull Quote', face: true,
+    desc: 'Short, punchy quote in large text alongside a speaker\'s photo. Quotation marks as a design element.',
+    channels: ['DiaryOfACEO', 'JayShetty', 'LewisHowes', 'TonyRobbins']
+  },
+];
+
+// Build TOC
+const tocEl = document.getElementById('toc');
+CATEGORIES.forEach(cat => {
+  const a = document.createElement('a');
+  a.href = `#cat-${cat.num}`;
+  const badge = cat.face
+    ? '<span class="face-tag">FACE</span>'
+    : '<span class="noface-tag">NO FACE</span>';
+  a.innerHTML = `${cat.num}. ${cat.title} ${badge}`;
+  tocEl.appendChild(a);
+});
+
+// Build categories
+const catsEl = document.getElementById('categories');
+CATEGORIES.forEach(cat => {
+  const section = document.createElement('div');
+  section.className = 'category';
+  section.id = `cat-${cat.num}`;
+
+  const badgeClass = cat.face ? 'face' : 'noface';
+  const badgeText = cat.face ? 'FACE' : 'NO FACE';
+
+  let html = `
+    <div class="cat-header">
+      <span class="cat-num">${cat.num}</span>
+      <span class="cat-title">${cat.title}</span>
+      <span class="cat-badge ${badgeClass}">${badgeText}</span>
+    </div>
+    <p class="cat-desc">${cat.desc}</p>
+  `;
+
+  cat.channels.forEach(ch => {
+    html += `
+      <div class="channel-section">
+        <div class="channel-name">${ch}</div>
+        <div class="thumb-grid" id="grid-${cat.num}-${ch}"></div>
+      </div>
+    `;
+  });
+
+  section.innerHTML = html;
+  catsEl.appendChild(section);
+
+  // Populate images
+  cat.channels.forEach(ch => {
+    const grid = document.getElementById(`grid-${cat.num}-${ch}`);
+    for (let i = 1; i <= 8; i++) {
+      const img = document.createElement('img');
+      const src = `${cat.dir}/${ch}-${i}.jpg`;
+      img.src = src;
+      img.alt = `${ch} thumbnail ${i}`;
+      img.loading = 'lazy';
+      img.onerror = function() { this.remove(); };
+      img.onclick = function(e) {
+        e.stopPropagation();
+        document.getElementById('lightboxImg').src = this.src;
+        document.getElementById('lightbox').classList.add('active');
+      };
+      grid.appendChild(img);
+    }
+  });
+});
+
+// Close lightbox on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
+});
+</script>
+</body>
+</html>
