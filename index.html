@@ -125,7 +125,7 @@ categories.forEach(cat => {
     const card = document.createElement('div');
     card.className = 'thumb-card';
     const img = document.createElement('img');
-    img.src = cat.dir + '/' + f;
+    img.src = 'curated/' + cat.dir + '/' + f;
     img.alt = f;
     img.loading = 'lazy';
     img.onclick = function(e) { e.stopPropagation(); lbImg.src = this.src; lightbox.classList.add('active'); };
