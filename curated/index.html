@@ -51,7 +51,6 @@
     padding: 8px 12px; font-size: 0.72rem; color: var(--muted);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  /* Lightbox */
   .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; justify-content: center; align-items: center; cursor: zoom-out; }
   .lightbox.active { display: flex; }
   .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
@@ -59,7 +58,7 @@
 </head>
 <body>
 <h1>YouTube Thumbnail Formats — Curated v2</h1>
-<p class="header-sub">53 curated examples across 13 categories. Shorts, low-quality, and before-after removed. Branded channels only.</p>
+<p class="header-sub">48 curated examples across 13 categories. All landscape, high-quality, branded channels only. No shorts, no before-after.</p>
 
 <nav class="toc" id="toc"></nav>
 <main id="gallery"></main>
@@ -85,18 +84,17 @@ const categories = [
   { id: "14", dir: "14-quote-card", title: "Quote Card", desc: "A quote or text-heavy card layout. The words are the thumbnail." }
 ];
 
-// File lists per category (hardcoded for reliability)
 const files = {
   "01-emotional-closeup": ["AlexHormozi-1.jpg","AlexHormozi-8.jpg","AliAbdaal-7.jpg","CharismaOnCommand-3.jpg"],
   "02-split-screen-vs": ["CharismaOnCommand-1.jpg","Psych2Go-4.jpg","thumb-13.jpg","thumb-14.jpg"],
   "03-bold-text": ["GrahamStephan-1.jpg","HowMoneyWorks-2.jpg","PatrickBoyle-1.jpg","thumb-13.jpg"],
-  "04-illustrated": ["thumb-14.jpg","thumb-15.jpg","thumb-2.jpg","thumb-3.jpg","thumb-4.jpg","thumb-5.jpg","thumb-6.jpg","thumb-7.jpg"],
+  "04-illustrated": ["Kurzgesagt-1.jpg","Kurzgesagt-3.jpg","thumb-2.jpg","thumb-3.jpg","thumb-4.jpg","thumb-5.jpg"],
   "05-number-anchor": ["AliAbdaal-3.jpg","thumb-8.jpg"],
   "06-reaction-object": ["thumb-1.jpg","thumb-2.jpg","thumb-4.jpg","thumb-5.jpg","thumb-6.jpg"],
   "08-mystery-blur": ["BusinessInsider-2.jpg","Veritasium-2.jpg","thumb-2.jpg"],
   "09-podcast-twoshot": ["DiaryOfACEO-1.jpg","DiaryOfACEO-3.jpg","thumb-12.jpg"],
-  "10-whiteboard-framework": ["AlexHormozi-3.jpg","HBR-2.jpg","thumb-1.jpg","thumb-4.jpg","thumb-5.jpg"],
-  "11-story-headline": ["thumb-1.jpg","thumb-3.jpg"],
+  "10-whiteboard-framework": ["AfterSkool-1.jpg","AfterSkool-3.jpg","AlexHormozi-3.jpg","HBR-2.jpg"],
+  "11-story-headline": ["Bloomberg-1.jpg","Bloomberg-3.jpg","WSJ-3.jpg","thumb-3.jpg"],
   "12-emotional-scene": ["thumb-1.jpg","thumb-2.jpg","thumb-4.jpg","thumb-5.jpg","thumb-6.jpg"],
   "13-minimalist-object": ["MKBHD-1.jpg","MattDAvella-2.jpg","TheMinimalists-3.jpg","TheMinimalists-5.jpg"],
   "14-quote-card": ["DiaryOfACEO-2.jpg","DiaryOfACEO-3.jpg","LewisHowes-1.jpg","LewisHowes-3.jpg"]
@@ -104,17 +102,14 @@ const files = {
 
 const toc = document.getElementById('toc');
 const gallery = document.getElementById('gallery');
-const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lightbox-img');
 
 categories.forEach(cat => {
   const imgs = files[cat.dir] || [];
-  // TOC
   const a = document.createElement('a');
   a.href = '#cat-' + cat.id;
   a.textContent = cat.id + ' ' + cat.title + ' (' + imgs.length + ')';
   toc.appendChild(a);
-  // Category
   const section = document.createElement('div');
   section.className = 'category';
   section.id = 'cat-' + cat.id;
@@ -128,7 +123,7 @@ categories.forEach(cat => {
     img.src = cat.dir + '/' + f;
     img.alt = f;
     img.loading = 'lazy';
-    img.onclick = function(e) { e.stopPropagation(); lbImg.src = this.src; lightbox.classList.add('active'); };
+    img.onclick = function(e) { e.stopPropagation(); lbImg.src = this.src; document.getElementById('lightbox').classList.add('active'); };
     const label = document.createElement('div');
     label.className = 'thumb-label';
     label.textContent = f.replace('.jpg','').replace(/-/g,' ');
