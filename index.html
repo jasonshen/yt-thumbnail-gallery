@@ -58,7 +58,7 @@
 </head>
 <body>
 <h1>YouTube Thumbnail Formats — Curated v2</h1>
-<p class="header-sub">148 examples across 21 categories. All landscape, high-quality, branded channels only.</p>
+<p class="header-sub">123 verified examples across 20 categories. Every thumbnail vision-checked for format accuracy.</p>
 
 <nav class="toc" id="toc"></nav>
 <main id="gallery"></main>
@@ -75,7 +75,6 @@ const categories = [
   { id: "04", dir: "04-illustrated", title: "Illustrated / Animated", desc: "Hand-drawn, animated, or illustrated style. No real photography." },
   { id: "05", dir: "05-number-anchor", title: "Number Anchor", desc: "A big number ($, %, count) is the visual hook that drives the click." },
   { id: "06", dir: "06-reaction-object", title: "Reaction + Object", desc: "Person reacting to or holding a product/object. The object drives curiosity." },
-  { id: "08", dir: "08-mystery-blur", title: "Mystery / Blur", desc: "Intentionally obscured, blurred, or redacted elements that create curiosity gaps." },
   { id: "09", dir: "09-podcast-twoshot", title: "Podcast Two-Shot", desc: "Two people in interview or podcast framing. Conversation energy." },
   { id: "10", dir: "10-whiteboard-framework", title: "Whiteboard / Framework", desc: "Diagrams, frameworks, visual teaching. The structure IS the thumbnail." },
   { id: "11", dir: "11-story-headline", title: "Story Headline", desc: "News-style or documentary framing. The headline carries the thumbnail." },
@@ -94,18 +93,18 @@ const categories = [
 
 const files = {
   "01-emotional-closeup": ["goggins-consistent_4JRrAe-xz44.jpg","goggins-get-up_5j3S2ZuiJfc.jpg","goggins-truth_eCVL7FnNCEw.jpg","hormozi-confidence_pt50QF6al8g.jpg","melrobbins-screwing-yourself_Lp7E973zozc.jpg","melrobbins-stop-caring_BR-1OeY8BOA.jpg","melrobbins-stop-procrastinating_4x7MkLDGnu8.jpg"],
-  "02-split-screen-vs": ["ai-atheist-vs-believer_EjxL2oB7J-o.jpg","apple-vs-samsung-service_Z7iBFklVU_I.jpg","cheap-vs-expensive-phones_9tcyWI45w7s.jpg","cheap-vs-mid-vs-expensive_7mCTaTJ0kDo.jpg","iphone-vs-android-2026_a6dEEUIlYK0.jpg","jordan-vs-lebron_tl3mR6eoEa8.jpg","rubio-vs-trump_pmC8AAPtNoE.jpg","samsung-vs-apple-24hrs_jZTE5ouxZXQ.jpg","samsung-vs-apple-products_mxwKexne1l8.jpg"],
-  "03-bold-text": ["fake-genius-fraud_w3EYKuFGJ5c.jpg","hidden-secrets-money_iFDe5kUUyT0.jpg","howmoneyworks-dont-matter_T2OHjHPkUzM.jpg","howmoneyworks-economy-collapse_sr7OVWgqDIM.jpg","howmoneyworks-economy-sucks_AuXYXih0wVA.jpg","howmoneyworks-private-credit_gWLuTxn2fMI.jpg","ponzi-financial-idiot_LgDQG-ZKRFg.jpg","woman-scammed-jpmorgan_Kfdj3AfDD74.jpg"],
+  "02-split-screen-vs": ["ai-atheist-vs-believer_EjxL2oB7J-o.jpg","apple-vs-samsung-service_Z7iBFklVU_I.jpg","cheap-vs-expensive-phones_9tcyWI45w7s.jpg","cheap-vs-mid-vs-expensive_7mCTaTJ0kDo.jpg","iphone-vs-android-2026_a6dEEUIlYK0.jpg","jordan-vs-lebron_tl3mR6eoEa8.jpg","samsung-vs-apple-24hrs_jZTE5ouxZXQ.jpg","samsung-vs-apple-products_mxwKexne1l8.jpg"],
+  "03-bold-text": ["hidden-secrets-money_iFDe5kUUyT0.jpg","howmoneyworks-dont-matter_T2OHjHPkUzM.jpg","howmoneyworks-economy-collapse_sr7OVWgqDIM.jpg","howmoneyworks-economy-sucks_AuXYXih0wVA.jpg","howmoneyworks-private-credit_gWLuTxn2fMI.jpg","woman-scammed-jpmorgan_Kfdj3AfDD74.jpg"],
   "04-illustrated": ["kurzgesagt-black-holes_JtUAAXe_0VI.jpg","kurzgesagt-egg_dSu5sXmsur4.jpg","kurzgesagt-optimistic-nihilism_MBRqu0YOH14.jpg","kurzgesagt-solar-system_ipVxxxqwBQw.jpg","teded-how-sugar-affects_GVU_zANtroE.jpg","teded-riddles_RVMZxH1TIIQ.jpg","teded-sleep_NbuUW9i-mHs.jpg"],
-  "05-number-anchor": ["40-books-rich_pVboJN7YJ0o.jpg","7-millionaire-habits_TVIRZPbrHus.jpg","7-mindset-shifts-millions_x3TbOrkbUR8.jpg","7-money-habits_55_awqruJxE.jpg","7-rules-rich_EVw-OaJw5ss.jpg","7-signs-wealthy_SnX_GHgiwu0.jpg","every-level-wealth_k6pcAcFKW30.jpg","rich-vs-poor-mindset_az6NibAUf7Y.jpg"],
+  "05-number-anchor": ["7-millionaire-habits_TVIRZPbrHus.jpg","7-rules-rich_EVw-OaJw5ss.jpg","7-signs-wealthy_SnX_GHgiwu0.jpg","rich-vs-poor-mindset_az6NibAUf7Y.jpg"],
   "06-reaction-object": ["10-viral-tiktok-products__sg9D-j9pgg.jpg","iphone17-review_Xsz-_c4-WJ0.jpg","mkbhd-iphone17pro_TZfNHV24sR4.jpg","mkbhd-vision-pro_rU9aqBv0YdY.jpg","ridge-wallet-waste_gqzml-Z6Nbw.jpg","unrealistic-pinterest_jOe_xY5-DII.jpg","viral-tiktok-gadgets_h359LRmMZMU.jpg","zfold-vs-iphone_dXZQDXF1dsA.jpg"],
-  "08-mystery-blur": ["lemmino-great-silence_4fuHzC9aTik.jpg","veritasium-everyone-wrong_XFnGhrC_3Gs.jpg","veritasium-illusion_sNhhvQGsMEc.jpg","veritasium-risk_OxGsU8oIWjY.jpg","veritasium-scientific-fraud_hFZFjoX2cGg.jpg","veritasium-worlds-largest_HeQX2HjkcNo.jpg"],
-  "09-podcast-twoshot": ["doac-aging-sinclair_DnvWAP99r3Y.jpg","doac-body-language_9uSXOr-AdAU.jpg","doac-cognitive-decline_0t_DD5568RA.jpg","doac-fat-burning_3C185Gkgg0U.jpg","doac-sleep-doctor_pXlMKzcZlwM.jpg","lex-elon-musk_DxREm3s1scA.jpg","lex-jordan-peterson_q8VePUwjB9Y.jpg","lex-zuckerberg_hER0Qp6QJNU.jpg"],
-  "10-whiteboard-framework": ["architecture-diagram_FS_M3s2BL8M.jpg","business-process-mapping_zGB9SScvoQU.jpg","hormozi-content-strategy_MD5-HByRxoA.jpg","hormozi-funnel-formula_yZuz2VmkMxU.jpg","hormozi-grow-business_HxEQCHpZzHk.jpg","strategic-roadmap_QhJ0epIIi7E.jpg","strategy-maps_duHV65uVghc.jpg","swot-analysis_uC1k3KnW9Ik.jpg"],
-  "11-story-headline": ["bloomberg-gucci-fell_xbgYIQPIkm8.jpg","bloomberg-hooters-rise-fall_wuTTamqrHWE.jpg","bloomberg-wework-rise-fall_X2LwIiKhczo.jpg","cnbc-ftx-collapse_XqwGt69pDXQ.jpg","wsj-hospitality-collapse_BrfkFftU8PI.jpg","wsj-private-credit_nXyot2gnxqg.jpg","wsj-starbucks-ceo_Mp_6X8Gbbe4.jpg","wsj-wework-wrong_p3q5m0ILTfk.jpg"],
-  "12-emotional-scene": ["perel-crush-coworker_M0MwDSMGCek.jpg","perel-desire-longterm_sa0RUmGTCYY.jpg","perel-erotic-intelligence_tO0xgj3kEuI.jpg","perel-family-dynamics_ZlQyyBOf-PA.jpg","perel-female-sexuality_OvIfsb9w2ME.jpg","perel-partner-criticizes_PiK9SIuB_LU.jpg","perel-perfect-partner_a-PDqXa_K7E.jpg","perel-rethinking-infidelity_P2AUat93a8Q.jpg"],
-  "13-minimalist-object": ["mkbhd-129-smartphone_6uS5F1MSzaQ.jpg","mkbhd-cameras-reality_MZ8giCWDcyE.jpg","mkbhd-homepod-review_gvqZCMGjh3s.jpg","mkbhd-ios26-liquid-glass_FXrcFeuYtq8.jpg","mkbhd-oneplus-nord_Xzh8BdaaAvs.jpg","mkbhd-overrated-tech_NbzpwG4n6Vs.jpg","mkbhd-pixel4a-review_dlHnleQU9tQ.jpg","mkbhd-whats-on-phone_KW21q_7U6Ao.jpg"],
-  "14-quote-card": ["cbum-discipline-confidence_DHWEqlG7DI0.jpg","gabor-mate-speechless_o4k6T0nKJZQ.jpg","goggins-maximum-effort_WNSZ6xouNv4.jpg","jayshetty-lewis-hamilton_AyiWKXTd9aY.jpg","madonna-exclusive_zUvRv5JrItk.jpg","mcconaughey-life-changes_Eu1kHIztT24.jpg","shihengyi-7-rules_CT-bYTPPPdM.jpg"],
+  "08-mystery-blur": [],
+  "09-podcast-twoshot": ["doac-aging-sinclair_DnvWAP99r3Y.jpg","doac-body-language_9uSXOr-AdAU.jpg","doac-cognitive-decline_0t_DD5568RA.jpg","doac-fat-burning_3C185Gkgg0U.jpg","doac-sleep-doctor_pXlMKzcZlwM.jpg"],
+  "10-whiteboard-framework": ["architecture-diagram_FS_M3s2BL8M.jpg","business-process-mapping_zGB9SScvoQU.jpg","hormozi-funnel-formula_yZuz2VmkMxU.jpg","strategic-roadmap_QhJ0epIIi7E.jpg","strategy-maps_duHV65uVghc.jpg","swot-analysis_uC1k3KnW9Ik.jpg"],
+  "11-story-headline": ["bloomberg-hooters-rise-fall_wuTTamqrHWE.jpg","bloomberg-wework-rise-fall_X2LwIiKhczo.jpg","cnbc-ftx-collapse_XqwGt69pDXQ.jpg","wsj-hospitality-collapse_BrfkFftU8PI.jpg","wsj-private-credit_nXyot2gnxqg.jpg","wsj-starbucks-ceo_Mp_6X8Gbbe4.jpg","wsj-wework-wrong_p3q5m0ILTfk.jpg"],
+  "12-emotional-scene": ["perel-crush-coworker_M0MwDSMGCek.jpg","perel-desire-longterm_sa0RUmGTCYY.jpg","perel-family-dynamics_ZlQyyBOf-PA.jpg","perel-partner-criticizes_PiK9SIuB_LU.jpg","perel-perfect-partner_a-PDqXa_K7E.jpg","perel-rethinking-infidelity_P2AUat93a8Q.jpg"],
+  "13-minimalist-object": ["mkbhd-129-smartphone_6uS5F1MSzaQ.jpg","mkbhd-homepod-review_gvqZCMGjh3s.jpg","mkbhd-ios26-liquid-glass_FXrcFeuYtq8.jpg","mkbhd-oneplus-nord_Xzh8BdaaAvs.jpg","mkbhd-pixel4a-review_dlHnleQU9tQ.jpg","mkbhd-whats-on-phone_KW21q_7U6Ao.jpg"],
+  "14-quote-card": ["cbum-discipline-confidence_DHWEqlG7DI0.jpg","gabor-mate-speechless_o4k6T0nKJZQ.jpg","jayshetty-lewis-hamilton_AyiWKXTd9aY.jpg","madonna-exclusive_zUvRv5JrItk.jpg","mcconaughey-life-changes_Eu1kHIztT24.jpg"],
   "15-tier-list": ["business-degree-tier-list_shane-hummus_B18s35MlYZw.jpg","cereal-tier-list_bugs_HxqYznihKe4.jpg","everything-tier-list_circletoons_lD7g00gxhFg.jpg","finance-careers-tier-list_aj-srmek_WNqgikiQM2w.jpg","jobs-future-tier-list_shane-hummus_SxKv3E6b-6M.jpg","minecraft-tier-list_socksstudios_FPO1UXQVEyk.jpg"],
   "16-iceberg": ["4chan-iceberg_dantavius_6HWf296l1yg.jpg","alien-isolation-iceberg_saadtheglad_eOTfYky1aYE.jpg","baldurs-gate-iceberg_franklygaming_ZhKtAYNRF6o.jpg","linguistics-iceberg_duncan-clarke_GFz6KqZurFY.jpg","lost-media-iceberg_sourcebrew_v1rvg0yBpb0.jpg","scp-iceberg_maker_ihALi1wACvE.jpg"],
   "17-case-study": ["47b-cult_magnates-media_c9Xm1bT50DQ.jpg","apple-failing_think-school_wP6nHR7cI58.jpg","grab-rise_cnbc_PR2194ddosg.jpg","mbas-failed-boeing_think-school_AnOqz5TsumU.jpg","nvidia-rise_explorist_1QC9X_QW52k.jpg","wework-collapse_wsj_p3q5m0ILTfk.jpg"],
